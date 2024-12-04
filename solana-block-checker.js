@@ -1,3 +1,8 @@
+/*
+Expected output:
+The most recent block number is: 305420040
+Execution time: 2695.78 ms
+*/
 // Import the required library
 const { Connection, clusterApiUrl } = require('@solana/web3.js');
 
@@ -11,7 +16,8 @@ async function getRecentBlockNumber() {
 async function getBlockhashForSlot(slot) {
   try {
     // Fetch the confirmed block details for the specified slot
-    const block = await connection.getConfirmedBlock(slot);
+    //const block = await connection.getConfirmedBlock(slot); // Deprecated
+    const block = await connection.getBlock(slot, {maxSupportedTransactionVersion: 0});
 
     if (block) {
       console.log(`Blockhash for slot ${slot}: ${block.blockhash}`);
